@@ -1,8 +1,17 @@
 
+
+<h1>Guzzle & TMDB API test lab</h1>
 <?php
 
 require_once 'vendor/autoload.php';
-include 'config/config.php';
+
+// On définit une constante pour stocker la clé de l'API
+define('API_KEY', '76504e519407b7a8839cbac701e1d6c6');
+
+// On définit une autres constante pour stocker la langue du jeu de résultat
+define('LANGUAGE', 'fr');
+
+define('API_URL', 'https://api.themoviedb.org/3/');
 
 // Note : Faire une fonction de l'appel à Guzzle
 // get_client();
@@ -46,28 +55,17 @@ $body_response = json_decode($body_response);
 
 // Réponse obtenue
 
-// echo '<pre>';
-// print_r($body_response->results);
-// echo '</pre>';
+echo '<pre>';
+print_r($body_response->results);
+echo '</pre>';
 
 // https://www.themoviedb.org/talk/53c11d4ec3a3684cf4006400?language=fr-FR
 // echo '<img src="https://image.tmdb.org/t/p/original/'. $body->backdrop_path.' " >';
 
 ?>
-<!DOCTYPE html>
-<html lang="fr" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>Ma Ciné</title>
-  </head>
-
-  <body>
-    <main>
-      <div class="container" id="details">
-
-      </div>
-    </main>
-  </body>
+<?php foreach ($body_response->results as $index => $film) {
+   echo '<img src="https://image.tmdb.org/t/p/w342/'. $film->poster_path.' " >';
+   echo $film->title.'<br>';
+   echo $film->overview.'<br>';
+}
+?>

@@ -1,0 +1,5 @@
+.film-card,
+.film-card:hover{
+  text-decoration: none;
+  color: black;
+}
